@@ -5,39 +5,10 @@ import MyButton from "./MyButton";
 import Myheader from "./Myheader";
 import EmotionItem from "./EmotionItem";
 import { DiaryDispatchContext } from "../App";
+import { getStringDate } from "../util/date";
+import { emotionList } from "../util/emotion";
 
-const emotionList = [
-    {
-        emotion_id : 1,
-        emotion_img : process.env.PUBLIC_URL + `/assets/emotion1.png`,
-        emotion_descript: '개좋음'
-    },
-    {
-        emotion_id : 2,
-        emotion_img : process.env.PUBLIC_URL + `/assets/emotion2.png`,
-        emotion_descript: '좋음'
-    },
-    {
-        emotion_id : 3,
-        emotion_img : process.env.PUBLIC_URL + `/assets/emotion3.png`,
-        emotion_descript: '그냥그럼'
-    },
-    {
-        emotion_id : 4,
-        emotion_img : process.env.PUBLIC_URL + `/assets/emotion4.png`,
-        emotion_descript: '나쁨'
-    },
-    {
-        emotion_id : 5,
-        emotion_img : process.env.PUBLIC_URL + `/assets/emotion5.png`,
-        emotion_descript: '개나쁨'
-    },
-]
 
-const getStringDate = (date) => {
-    return date.toISOString().slice(0,10);
-
-}
 const DiaryEditor =({isEdit, originData}) => {
 
     const contentRef = useRef();
