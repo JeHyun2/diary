@@ -8,7 +8,7 @@ const sortOptionList = [
     {value: "oldest", name: "오래된 순"},
 ]
 
-const filteOptionList = [
+const filterOptionList = [
     {value: "all", name: "All"}, 
     {value: "good", name: "Good"}, 
     {value: "bad", name: "Bad"}, 
@@ -29,7 +29,7 @@ const DiaryList =({diaryList}) => {
 
     const navigate = useNavigate();
 
-    const [sortType, setSortType] = useState("lastest");
+    const [sortType, setSortType] = useState("latest");
     const [filter, setFilter] = useState("all");
 
     const getProcessDiaryList = () => {
@@ -63,12 +63,25 @@ const DiaryList =({diaryList}) => {
         <div className="DiaryList">
             <div className="menu_wrapper">
                 <div className="left_col">
-                    <ControlMenu value={sortType} onChange={setSortType} optionList= {sortOptionList}></ControlMenu>
-                    <ControlMenu value={filter} onChange={setFilter} optionList ={filteOptionList}></ControlMenu>
+                    <ControlMenu 
+                    value={sortType} 
+                    onChange={setSortType} 
+                    optionList= {sortOptionList}>
+                    </ControlMenu>
+
+                    <ControlMenu 
+                    value={filter} 
+                    onChange={setFilter} 
+                    optionList ={filterOptionList}>                      
+                    </ControlMenu>
             
                 </div>
                 <div className="right_col">
-                    <MyButton type={"positive"} text={"새 일기 쓰기"} onClick={() => navigate('/new')}></MyButton>
+                    <MyButton 
+                    type={"positive"}
+                    text={"새 일기 쓰기"} 
+                    onClick={() => navigate('/new')}>
+                    </MyButton>
             
                 </div>
             </div>

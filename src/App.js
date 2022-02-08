@@ -15,22 +15,25 @@ const reducer =(state, action) => {
   switch(action.type){
     case 'INIT':{
       return action.data
-    };
+    }
     case 'CREATE': {
       newState = [action.data, ...state];
       break;
-    };
+    }
     case 'REMOVE': {
       newState = state.filter((it)=>it.id !== action.targetId);
       break;
-    };
+    }
     case 'EDIT': {
-      newState = state.map((it) => it.id === action.data.id ? {...action.data}: it)
+      newState = state.map((it) => 
+        it.id === action.data.id ? {...action.data}: it
+      );
+      break;
     }
     default:
       return state;
   }
-
+  return newState;
 }
 
 export const DiaryStateContext = React.createContext();
@@ -39,34 +42,35 @@ export const DiaryDispatchContext = React.createContext();
 const dummyData =[
   {
     id: 1,
-    emotion: 1,
+    date: 1644294231395,
     content: "오늘의 일기 1번",
-    date: 1644294231395
+    emotion: 1,
   },
   {
     id: 2,
-    emotion: 2,
+    date: 1644294231396,
     content: "오늘의 일기 2번",
-    date: 1644294231396
+    emotion: 2,
   },
   {
     id: 3,
-    emotion: 3,
+    date: 1644294231397,
     content: "오늘의 일기 3번",
-    date: 1644294231397
+    emotion: 3,
   },
   {
     id: 4,
-    emotion: 4,
+    date: 1644294231398,
     content: "오늘의 일기 4번",
-    date: 1644294231398
+    emotion: 4,
   },
   {
     id: 5,
-    emotion: 5,
+    date: 1644294231399,
     content: "오늘의 일기 5번",
-    date: 1644294231399
-  }
+    emotion: 5,
+  },
+  
 ]
 
 function App() {
@@ -77,12 +81,15 @@ function App() {
   const dataId = useRef(0);
 
   const onCreate = (date, content, emotion)=> {
-    dispatch({type: "CREATE", data:{
-      id: dataId.current,
-      date: new Date(date).getTime(),
-      content,
-      emotion,
-    }})
+    dispatch({
+      type: "CREATE", 
+      data: {
+        id: dataId.current,
+        date: new Date(date).getTime(),
+        content,
+        emotion,
+    }
+  })
     dataId.current += 1;
   };
   
@@ -101,8 +108,11 @@ function App() {
 
   return (
     <DiaryStateContext.Provider value={data}>
-      <DiaryDispatchContext.Provider value={{
-        onCreate, onEdit, onRemove
+      <DiaryDispatchContext.Provider 
+      value={{
+        onCreate, 
+        onEdit, 
+        onRemove,
       }}>
         <BrowserRouter>
           <div className="App">
